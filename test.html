@@ -2,23 +2,67 @@
 <html lang="en-US">
   <head>
     <meta charset="utf-8" />
-    <title>Gamedev Canvas Workshop</title>
+    <title>RobCo Industries™ Termlink</title>
     <style>
       * {
         padding: 0;
         margin: 0;
+        background: rgb(50, 55, 40);
       }
       canvas {
         background: #eee;
         display: block;
         margin: 0 auto;
       }
+      #ScienceRange,#TerminalRange {
+      /* transform: rotate(-90deg); */
+      width: 600px;
+      height: 30px;
+      
+      }
+      #PowerButton{
+        background: rgb(225, 60, 30);
+        width: 64px;
+        height: 64px;
+        border-radius: 10px;
+      }
+      .app {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-evenly;
+        align-items: center;
+      }
+
+      .app__center {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
     </style>
   </head>
   <body>
-    <canvas id="myCanvas" width="864" height="704"></canvas>
-    <script src="test.js"> </script>
+    <div class="app">
+      
+      <div class="app__center">
+          <canvas id="myCanvas" width="864" height="704"></canvas>
+          <br>
+          <button id="PowerButton">Power</button>
+          <br>
+          <div id="TerminalRangeLabel">Terminal level: 50</div>
+          <input type="range" step = 5 id="TerminalRange">
+          <div id="ScienceRangeLabel">Science level: 50</div>
+          <input type="range" step = 5 id="ScienceRange">
+          
+      </div>
+      
+      
+    </div>
 
-    </script>
+
+    
+    
+    
+    
+    <script src="test.js"> </script>
   </body>
 </html>
