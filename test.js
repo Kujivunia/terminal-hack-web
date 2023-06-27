@@ -9,6 +9,7 @@ const DumpWidth = 12;
 const DumpHeight = 34;
 const iHackingMinWords = 5;
 const iHackingMaxWords = 20;
+let GameState = 0;
 let GlobalXY = {x:0,y:0};
 let CursorWordIndex = 0;
 let CursorFlat = 0;
@@ -18,8 +19,8 @@ let IOLog = [];
 const TrashChars = "!\"#$%&\'()*+/:;<=>?@\\[\\]^_{|}";
 const OpenBrackets = "<[{(";
 const CloseBrackets = ">]})";
-let TerminalLevel = 0;
-let ScienceLevel = 0;
+let TerminalLevel = 50;
+let ScienceLevel = 50;
 let PasswordLength = 0;
 let WordCount = 0;
 let CurrentAttempts = 4;
@@ -191,19 +192,29 @@ function placeWordsTable(){
   }
   
 }
-//Проверка слова под курсором
+//Проверка слова под курсором//######################################################
 function CheckWord(){
   let xy = {x:Math.floor(GlobalXY.x/char_width),y:Math.floor(GlobalXY.y/char_height)};
 
   if (((xy.x>6 && xy.x<19) || (xy.x>26 && xy.x<39)) && xy.y>4){
     if (mouseDown === true) {
       mouseDown = false;
+      if (WordsTable[CursorWordIndex] == Password) {
+        
+        GameState = 1;
+      }
+
       IOLog.push(WordsTable[CursorWordIndex]);
       CurrentAttempts--;
       
     }
+  }
+  if (CurrentAttempts < 1) {
+    GameState = 2;
+  }
 }
-}
+///########################################################################################
+//////////#################################################################################
 //Размещение лога в матрицу консоли
 function placeIOLog(){
   if (IOLog.length > 0){
@@ -273,14 +284,33 @@ function CursorWordIndexMath(){
 //Компоновка и отрисовка всего окна///////////////////////////////////////////////////
 function draw(){
   flushRect(0,0,TerminalWidth,TerminalHeight);
-  CursorWordIndexMath();
-  PlaceHackHeader();
-  PlaceHexAddresses();
-  placeWordsTable();
-  placeHighlightingWord(CursorWordIndex);
+  switch (GameState) {
+    case 0://Идёт игра
+      CursorWordIndexMath();
+      PlaceHackHeader();
+      PlaceHexAddresses();
+      placeWordsTable();
+      placeHighlightingWord(CursorWordIndex);
+      placeIOLog();
+      placeChoosenWord()
+      break;
 
-  placeIOLog();
-  placeChoosenWord()
+    case 1://Победа
+      console.log("HACKED");
+      window.location.reload();
+      //alert("HACKED");
+      window.location.reload();
+      break;
+
+    case 2://Поражение
+      console.log("BLOCKED");
+      //alert("BLOCKED");
+      window.location.reload();
+      break;
+    default:
+      break;
+  }
+  
   DrawChars();
 }
 //Установка хексов
@@ -372,3 +402,24 @@ const drawing = setInterval(draw, 16); //обвновляем всю консо�
 const array1 = [5, 12, 8, "130", 44];
 
 const found = array1.find(element => element == 130);
+
+const button = document.querySelector('#PowerButton');
+button.addEventListener('click', () => {
+  console.log('the button has been clicked');
+});
+
+
+const ScienceRange = document.querySelector('#ScienceRange');
+ScienceRange.addEventListener('input', () => {
+  document.getElementById("ScienceRangeLabel").innerHTML = 
+  "Science level: "+ ScienceRange.value.toString();
+  ScienceLevel = ScienceRange.value;
+});
+
+const TerminalRange = document.querySelector('#TerminalRange');
+TerminalRange.addEventListener('input', () => {
+  document.getElementById("TerminalRangeLabel").innerHTML = 
+  "Terminal level: "+ TerminalRange.value.toString();
+  TerminalLevel = TerminalRange.value;
+  console.log(TerminalLevel);
+});
