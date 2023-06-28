@@ -1,4 +1,4 @@
-Strings = {
+const Strings = {
     "ru": {
       "EnterPassword": "введите пароль",
       "WelcomeToRobco": "welcome to robco industries (tm) termlink",

@@ -6,45 +6,78 @@ button.addEventListener('click', () => {
 
 const ScienceRange = document.querySelector('#ScienceRange');
 ScienceRange.addEventListener('input', () => {
-  document.getElementById("ScienceRangeLabel").innerHTML = 
-  "Science level: <b>"+ ScienceRange.value.toString()+"</b>";
-  ScienceLevel = Number(ScienceRange.value);
+
 if (ScienceLevel < TerminalLevel) {
-  alert("Для взлома этого терминала нужен навык: Наука, уровень "+TerminalLevel+" .");
+  //ScienceLevel = TerminalLevel;
+  //ScienceRange.value = ScienceLevel;
+  TerminalLevel = Math.floor(ScienceLevel/25)*25;
+  TerminalRange.value = TerminalLevel;
+  document.getElementById("TerminalRangeLabel").innerHTML = 
+  "Terminal level: <b>"+ 
+  terminalLevelText(Number(TerminalRange.value))
+  +"</b>"
+  TerminalLevel = Number(TerminalRange.value);
+  //alert("Для взлома этого терминала нужен навык: Наука, уровень "+TerminalLevel+" .");
 }
-});
-ScienceRange.addEventListener('change', () => {
-  document.getElementById("ScienceRangeLabel").innerHTML = 
-  "Science level: <b>"+ ScienceRange.value.toString()+"</b>";
-  ScienceLevel = Number(ScienceRange.value);
-if (ScienceLevel < TerminalLevel) {
-  alert("Для взлома этого терминала нужен навык: Наука, уровень "+TerminalLevel+" .");
-}
+document.getElementById("ScienceRangeLabel").innerHTML = 
+"Science level: <b>"+ ScienceRange.value.toString()+"</b>";
+ScienceLevel = Number(ScienceRange.value);
+
 });
 
+
+ScienceRange.addEventListener('change', () => {
+if (ScienceLevel < TerminalLevel) {
+  //ScienceLevel = TerminalLevel;
+  //ScienceRange.value = ScienceLevel;
+  TerminalLevel = Math.floor(ScienceLevel/25)*25;
+  TerminalRange.value = TerminalLevel;
+  document.getElementById("TerminalRangeLabel").innerHTML = 
+  "Terminal level: <b>"+ 
+  terminalLevelText(Number(TerminalRange.value))
+  +"</b>"
+  TerminalLevel = Number(TerminalRange.value);
+  //alert("Для взлома этого терминала нужен навык: Наука, уровень "+TerminalLevel+" .");
+}
+document.getElementById("ScienceRangeLabel").innerHTML = 
+"Science level: <b>"+ ScienceRange.value.toString()+"</b>";
+ScienceLevel = Number(ScienceRange.value);
+});
+////////////////////////////////////////////////////////////////////
 const TerminalRange = document.querySelector('#TerminalRange');
 TerminalRange.addEventListener('input', () => {
+
+  if (ScienceLevel < TerminalLevel) {
+    ScienceLevel = TerminalLevel;
+    ScienceRange.value = ScienceLevel;
+    document.getElementById("ScienceRangeLabel").innerHTML = 
+    "Science level: <b>"+ ScienceRange.value.toString()+"</b>";
+    //alert("Для взлома этого терминала нужен навык: Наука, уровень "+TerminalLevel+" .");
+  }
   document.getElementById("TerminalRangeLabel").innerHTML = 
   "Terminal level: <b>"+ 
-  // TerminalRange.value.toString()
-  terminalLevelText(Number(TerminalRange.value));
-  +"</b>";
+  terminalLevelText(Number(TerminalRange.value))
+  +"</b>"
   TerminalLevel = Number(TerminalRange.value);
+});
+
+TerminalRange.addEventListener('change', () => {
+
   if (ScienceLevel < TerminalLevel) {
-    alert("Для взлома этого терминала нужен навык: Наука, уровень "+TerminalLevel+" .");
+    ScienceLevel = TerminalLevel;
+    ScienceRange.value = ScienceLevel;
+    document.getElementById("ScienceRangeLabel").innerHTML = 
+    "Science level: <b>"+ ScienceRange.value.toString()+"</b>";
+    //alert("Для взлома этого терминала нужен навык: Наука, уровень "+TerminalLevel+" .");
   }
 
-});
-TerminalRange.addEventListener('change', () => {
   document.getElementById("TerminalRangeLabel").innerHTML = 
   "Terminal level: <b>"+ 
   // TerminalRange.value.toString()
-  terminalLevelText(Number(TerminalRange.value));
-  +"</b>";
+  terminalLevelText(Number(TerminalRange.value))
+  +"</b>"
   TerminalLevel = Number(TerminalRange.value);
-  if (ScienceLevel < TerminalLevel) {
-    alert("Для взлома этого терминала нужен навык: Наука, уровень "+TerminalLevel+" .");
-  }
+
 
 });
 
