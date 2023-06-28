@@ -1,9 +1,7 @@
 //Проверка слова под курсором//######################################################
-function CheckWord(){
-  let xy = {x:Math.floor(GlobalXY.x/char_width),y:Math.floor(GlobalXY.y/char_height)};
 
-  if (((xy.x>6 && xy.x<19) || (xy.x>26 && xy.x<39)) && xy.y>4){
-    if (mouseDown === true) {
+function CheckWord(){
+
       mouseDown = false;
       console.log(SearchSecretCombinations(CursorWordIndex));
       CurrentAttempts--;
@@ -32,6 +30,5 @@ function CheckWord(){
         GameState = 2;
       }
 
-    }
-  }
+
 }

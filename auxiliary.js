@@ -1,4 +1,38 @@
+function terminalLevelText(lvl){
+  switch (lvl) {
+    case 0:
+      return "Very Easy";
+      break;
+      case 25:
+        return "Easy";
+      break;
+      case 50:
+        return "Average";
+      break;
+      case 75:
+        return "Hard";
+      break;
+      case 100:
+        return "Very Hard";
+      break;
 
+    default:
+      return "Custom level";
+      break;
+  }
+}
+
+function cursorOnWords(){
+  result = false;
+  let xy = {x:Math.floor(GlobalXY.x/char_width),y:Math.floor(GlobalXY.y/char_height)};
+
+  if (((xy.x>6 && xy.x<19) || (xy.x>26 && xy.x<39)) && xy.y>4){
+    if (mouseDown === true) {
+      result = true;
+    }
+  }
+  return result;
+}
 //Случайные цифры по всей матрице консоли
 function testConsoleCells() {
     for (let fx = 0; fx < TerminalWidth; fx++) {

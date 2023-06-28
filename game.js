@@ -78,7 +78,8 @@ canvas.addEventListener('mousedown', function (e) {
   //console.log(e);
   globalXYToFlatCursor();
   if (e.button == 0 && e.buttons == 1 && lastButton == 0)
-    CheckWord();
+    if (cursorOnWords())
+      CheckWord();
   lastButton = e.button;
 });
 //////////////////////////////////////////////////////////////
