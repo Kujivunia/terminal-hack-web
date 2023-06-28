@@ -5,7 +5,7 @@ function CheckWord(){
   if (((xy.x>6 && xy.x<19) || (xy.x>26 && xy.x<39)) && xy.y>4){
     if (mouseDown === true) {
       mouseDown = false;
-
+      console.log(SearchSecretCombinations(CursorWordIndex));
       CurrentAttempts--;
       if (WordsTable[CursorWordIndex] == Password) {
         GameState = 1;

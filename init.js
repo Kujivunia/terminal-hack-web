@@ -17,6 +17,10 @@ let HexAddresses = [];
 let WordsTable = [];
 let chars = [];
 let lastButton = 0;
+let UsedBracketsIndex = [];
+let WordsTableRanges = [];
+let BkColor ="green";//"#"+(40).toString(16).padStart(2,'0')+(40).toString(16).padStart(2,'0')+(40).toString(16).padStart(2,'0');
+let Color = "lightgreen";//"#"+(255).toString(16).padStart(2,'0')+(176).toString(16).padStart(2,'0')+(0).toString(16).padStart(2,'0');
 
 function reload(){////////////////////////////////////////////////
     GameState = 0;
@@ -39,7 +43,10 @@ function reload(){////////////////////////////////////////////////
     WordsTable = [];
     chars = [];
     lastButton = 0;
-
+    UsedBracketsIndex = [];
+    WordsTableRanges = [];
+    let bkColor = BkColor;
+    let color = Color;
     chars_init();
     setHexAddresses();
     DudsAndPasswordCount();
@@ -47,6 +54,15 @@ function reload(){////////////////////////////////////////////////
     GenerateWordsTable();
 }
 
+//Заполнение таблицы индексов границ слов
+function WordsTableRangesFill(){
+  let i = 0;
+  WordsTableRanges = [];
+  WordsTable.forEach(Word => {
+    WordsTableRanges.push({Key:i, Value:i + Word.length - 1});
+    i += Word.length;
+  });
+}
 //Инициализация матрицы консоли////////////////////////////////////////////////
 function chars_init(){
     for (let fx = 0; fx < TerminalWidth; fx++) {
@@ -57,8 +73,8 @@ function chars_init(){
       canvas_x: fx * char_width,
       canvas_y: fy * char_height,
       char:" ",
-      bkColor:"#"+(40).toString(16).padStart(2,'0')+(40).toString(16).padStart(2,'0')+(40).toString(16).padStart(2,'0'),
-      color:"#"+(255).toString(16).padStart(2,'0')+(176).toString(16).padStart(2,'0')+(0).toString(16).padStart(2,'0'),
+      bkColor: BkColor,
+      color:Color,
       status: 0 };
       }
     }
@@ -131,4 +147,5 @@ function GenerateWordsTable(){
       WordsTable.splice(getRandomInt(WordsTable.length + 1), 0, TrashChars[getRandomInt(TrashChars.length)]);
       //WordsTable[i] = TrashChars[getRandomInt(TrashChars.length)]
     }
+    WordsTableRangesFill();
   }

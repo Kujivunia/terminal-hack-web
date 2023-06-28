@@ -7,8 +7,8 @@ function flushRect(x,y,w,h){
       canvas_x: fx * char_width,
       canvas_y: fy * char_height,
       char:" ",
-      bkColor:"#"+(40).toString(16).padStart(2,'0')+(40).toString(16).padStart(2,'0')+(40).toString(16).padStart(2,'0'),
-      color:"#"+(255).toString(16).padStart(2,'0')+(176).toString(16).padStart(2,'0')+(0).toString(16).padStart(2,'0'),
+      bkColor: BkColor,
+      color: Color,
       status: 0 };
       }
     }
@@ -58,6 +58,60 @@ function placeHighlightingWord(i){
     }
     
   }
+
+  function placeGameField(){
+    let CurrentWordIndex = 0;
+    let i = 0;
+    let SecretCombinationsActive = false;
+    let SecretCombination = {Key:0,Value:0};
+    let localColor = Color;
+    let localBkColor = BkColor;
+    WordsTable.forEach(Word => {
+      if (OpenBrackets.includes(Word) && !(SecretCombinationsActive))
+      {
+          SecretCombination = SearchSecretCombinations(CurrentWordIndex);
+          SecretCombinationsActive = true;
+      }
+      if (CursorWordIndex == CurrentWordIndex || (CursorWordIndex == SecretCombination.Key && SecretCombination.Key != SecretCombination.Value && (CurrentWordIndex >= SecretCombination.Key && CurrentWordIndex <= SecretCombination.Value)))
+      {
+          localColor = BkColor;
+          localBkColor = Color;
+      }
+      else
+      {
+          SecretCombinationsActive = false;
+          localColor = Color;
+          localBkColor = BkColor;
+      }
+      for (let j = 0; j < Word.length; j++) {
+        if (Math.floor(i / DumpWidth) < DumpHeight / 2)
+            placeText(Math.floor(i % DumpWidth) + 7, Math.floor(i / DumpWidth) + (TerminalHeight - DumpHeight / 2), Word[j], localBkColor, localColor);
+          else
+            placeText(Math.floor(i % DumpWidth) + 20 + 7, Math.floor(i / DumpWidth) + (TerminalHeight - DumpHeight / 2) - DumpHeight / 2, Word[j], localBkColor, localColor);
+            i++;
+      }
+      CurrentWordIndex++;
+
+      flushRect(41,21,13,1);
+
+      if (OpenBrackets.includes(WordsTable[CursorWordIndex]))
+      {
+          for (let c = SearchSecretCombinations(CursorWordIndex).Key; c <= SearchSecretCombinations(CursorWordIndex).Value; c++)
+          {
+            placeText(DumpWidth * 2 + 12 + 4 + 1 + c - SearchSecretCombinations(CursorWordIndex).Key, (TerminalHeight - 1), WordsTable[c], localBkColor, localColor);
+          }
+      }
+      else
+      {
+          placeText(DumpWidth * 2 + 12 + 4 + 1, (TerminalHeight - 1), WordsTable[CursorWordIndex])
+      }
+
+
+      
+      
+    });
+
+  }
 //Размещение лога в матрицу консоли
   function placeIOLog(){
     if (IOLog.length > 0){
@@ -71,8 +125,8 @@ function placeHighlightingWord(i){
   
   //Размещение текста в матрицу консоли
   function placeText(x,y,str, 
-    bkColor="#"+(40).toString(16).padStart(2,'0')+(40).toString(16).padStart(2,'0')+(40).toString(16).padStart(2,'0'), 
-    color="#"+(255).toString(16).padStart(2,'0')+(176).toString(16).padStart(2,'0')+(0).toString(16).padStart(2,'0')){
+    bkColor= BkColor, 
+    color= Color){
     for (let i = 0; i < str.length; i++){ 
       if (y<TerminalHeight && y >=0){
         if (x+i<TerminalWidth && x+i >=0){

@@ -30,10 +30,11 @@ function gameLoop(){
       CursorWordIndexMath();
       PlaceHackHeader();
       PlaceHexAddresses();
-      placeWordsTable();
-      placeHighlightingWord(CursorWordIndex);
+      //placeWordsTable();
+      //placeHighlightingWord(CursorWordIndex);
+      placeGameField();
       placeIOLog();
-      placeChoosenWord();
+      //placeChoosenWord();
       break;
 
     case 1://Победа
