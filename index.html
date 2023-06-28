@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8" />
+    <title>RobCo Industries™ Termlink</title>
+    <style>
+      * {
+        padding: 0;
+        margin: 0;
+        
+      }
+      canvas {
+        background: #eee;
+        display: block;
+        margin: 0 auto;
+      }
+      #ScienceRange,#TerminalRange {
+      /* transform: rotate(-90deg); */
+      width: 600px;
+      height: 30px;
+      
+      }
+      #PowerButton{
+        background: rgb(225, 60, 30);
+        width: 64px;
+        height: 64px;
+        border-radius: 10px;
+      }
+      .app {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-evenly;
+        align-items: center;
+        
+      }
+      .body{
+        background: rgb(50, 55, 40);
+      }
+      .app__center {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+    </style>
+  </head>
+  <body class="body">
+    <div class="bg">
+      <div class="app">
+        
+        <div class="app__center">
+            <canvas id="myCanvas" width="864" height="704"></canvas>
+            <br>
+            <button id="PowerButton"><font size="4px"><b>Power</b></font></button>
+            <br>
+            <div id="TerminalRangeLabel">Terminal level: <b>50</b></div>
+            <input type="range" step = 25 id="TerminalRange">
+            <div id="ScienceRangeLabel">Science level: <b>50</b></div>
+            <input type="range" step = 5 id="ScienceRange">
+            
+        </div>
+        
+        
+      </div>
+    </div>
+
+    
+    <script src="common.js"> </script>
+    <script src="end.js"> </script>
+    <script src="auxiliary.js"> </script>
+    <script src="preRender.js"> </script>
+    <script src="render.js"> </script>
+    <script src="init.js"> </script>
+    <script src="htmlControlElements.js"> </script>
+    <script src="CheckWord.js"> </script>
+    <script src="SearchSecretCombinations.js"> </script>
+    <script src="game.js"> </script>
+  </body>
+</html>
