@@ -1,3 +1,23 @@
+String.prototype.format = function() {
+  let formatted = this;
+  for (let i = 0; i < arguments.length; i++) {
+    let regexp = new RegExp('\\{'+i+'\\}', 'gi');
+    formatted = formatted.replace(regexp, arguments[i]);
+  }
+  return formatted;
+};
+function WordBulls(foo, bar)
+{
+    if (foo.length != bar.length) return 0;
+    let Bulls = 0;
+    for (let i = 0; i < foo.length; i++)
+    {
+        Bulls += foo[i] == bar[i] ? 1 : 0;//готово
+    }
+
+    return Bulls;
+}
+
 function terminalLevelText(lvl){
   switch (lvl) {
     case 0:

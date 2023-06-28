@@ -19,9 +19,10 @@ let chars = [];
 let lastButton = 0;
 let UsedBracketsIndex = [];
 let WordsTableRanges = [];
+let Language = "en";
 let BkColor ="green";//"#"+(40).toString(16).padStart(2,'0')+(40).toString(16).padStart(2,'0')+(40).toString(16).padStart(2,'0');
 let Color = "lightgreen";//"#"+(255).toString(16).padStart(2,'0')+(176).toString(16).padStart(2,'0')+(0).toString(16).padStart(2,'0');
-
+let blockMouse = false;
 function reload(){////////////////////////////////////////////////
     GameState = 0;
     GlobalXY = {x:0,y:0};
@@ -47,6 +48,7 @@ function reload(){////////////////////////////////////////////////
     WordsTableRanges = [];
     let bkColor = BkColor;
     let color = Color;
+    blockMouse = false;
     chars_init();
     setHexAddresses();
     DudsAndPasswordCount();

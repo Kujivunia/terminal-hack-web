@@ -30,15 +30,22 @@ function UsedBracketsIndexFind(WordIndex = -1, BracketIndex = -1){
 }
 
 function SearchSecretCombinations(StartSearchWordIndex){
-    let result = {Key:0, Value:0}
+    let result = {Key:StartSearchWordIndex, Value:StartSearchWordIndex}
     let UsedBracketIndex = UsedBracketsIndexFind(StartSearchWordIndex);
+    let used = false;
     UsedBracketsIndex.forEach(index => {
         if (index == UsedBracketIndex)
             {
+                //console.log(result);
+                used = true;
                 return result;
             }
     });
-
+    if (used) {
+        used = false;
+        return result;
+    }
+    
     let OpenBracketType = OpenBrackets.indexOf(WordsTable[StartSearchWordIndex]);
     for (let i = StartSearchWordIndex; i < (((StartSearchWordIndex + DumpWidth) >= WordsTable.length) ? WordsTable.length : StartSearchWordIndex + DumpWidth); i++)
     {

@@ -18,3 +18,4 @@ const lockedScreen =
 `         TERMINAL LOCKED
 
 PLEASE, CONTACT AN ADMINISTRATOR`;
+

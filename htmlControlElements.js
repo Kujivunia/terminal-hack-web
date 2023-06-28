@@ -47,3 +47,8 @@ TerminalRange.addEventListener('change', () => {
   }
 
 });
+
+function handleLangChange() {
+  const selectElement = document.getElementById('lang');
+  Language = selectElement.value;
+}

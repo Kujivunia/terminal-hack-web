@@ -59,6 +59,7 @@ function placeHighlightingWord(i){
     
   }
 
+  //Отрисовка игроковго поля
   function placeGameField(){
     let CurrentWordIndex = 0;
     let i = 0;
@@ -143,18 +144,19 @@ function placeHighlightingWord(i){
 
   //Размещение заголовка и попыткок
 function PlaceHackHeader(){
-    placeText(0,0,"robco industries (tm) termlink protocol".toUpperCase());
-    if (CurrentAttempts>1) {
-      placeText(0,1,"enter password now".toUpperCase());
+    placeText(0,0,(Strings[Language]["RobcoIndustries"]).toUpperCase());
+    if (CurrentAttempts > 1) {
+      placeText(0,1,(Strings[Language]["EnterPassword"]).toUpperCase());
     }
     else{
-      placeText(0,1,"!!! warning: lockout imminent !!!".toUpperCase());
+      placeText(0,1,(Strings[Language]["LockoutImminent"]).toUpperCase());
     }
     let squares="";
     for (let i = 0; i < CurrentAttempts; i++) {
-      squares+="■ ";
+      squares+=Strings[Language]["Square"]+" ";
     }
-    placeText(0,3,CurrentAttempts + " attempt(s) left: ".toUpperCase()+squares);
+    let TempAttempts = 
+    placeText(0,3,((Strings[Language]["AttemptsLeft"]).format(CurrentAttempts)).toUpperCase()+squares);
     
     placeText(40,21,">");
   }
@@ -177,4 +179,17 @@ function PlaceHackHeader(){
   function placeChoosenWord(){
     flushRect(41,21,13,1);
     placeText(41,21,WordsTable[CursorWordIndex])
+  }
+
+  function endScreen(screen){
+    if (GameState == 2){
+    placeText(Math.floor(TerminalWidth / 2) - Math.floor(Strings[Language]["TerminalLocked"].length / 2), Math.floor(TerminalHeight / 2) - 1, (Strings[Language]["TerminalLocked"]).toUpperCase());
+    placeText(Math.floor(TerminalWidth / 2) - Math.floor(Strings[Language]["PleaseContactAnAdministrator"].length / 2), Math.floor(TerminalHeight / 2) + 1, (Strings[Language]["PleaseContactAnAdministrator"]).toUpperCase());
+    } else if(GameState == 1){
+      strs = hackedScreen.split('\n');
+      for (let i = 0; i < strs.length; i++) {
+        placeText(0,i,strs[i]);
+        
+      }
+    }
   }

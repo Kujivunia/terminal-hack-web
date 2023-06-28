@@ -17,7 +17,6 @@ const CloseBrackets = ">]})";
 canvas.width = char_width*TerminalWidth;
 canvas.height = char_height*TerminalHeight;
 
-
 ///########################################################################################
 //////////#################################################################################
 
@@ -38,16 +37,18 @@ function gameLoop(){
       break;
 
     case 1://Победа
-      console.log("HACKED");
-      placeIOLog();
+      //console.log("HACKED");
+      endScreen(hackedScreen);
+      //placeIOLog();
       //reload();
       //window.location.reload();
       //alert("HACKED");
       break;
 
     case 2://Поражение
-      console.log("BLOCKED");
-      placeIOLog();
+      //console.log("BLOCKED");
+      endScreen(lockedScreen);
+      //placeIOLog();
       //reload();
       //window.location.reload();
       //alert("BLOCKED");
@@ -64,23 +65,28 @@ function gameLoop(){
 canvas.addEventListener('mousemove', function (e) {
   let rect = canvas.getBoundingClientRect();
   let xy = {x:e.clientX - rect.left, y:e.clientY - rect.top};
-  GlobalXY = xy;
-  globalXYToFlatCursor();
+  if (!blockMouse) {
+    GlobalXY = xy;
+    globalXYToFlatCursor();  
+  }
+  
 });
 
 canvas.addEventListener('mousedown', function (e) {
   let rect = canvas.getBoundingClientRect();
   let xy = {x:e.clientX - rect.left, y:e.clientY - rect.top};
-  GlobalXY = xy;
-  if (mouseDown === false) {
-    mouseDown = true;
+  if (!blockMouse) {
+    GlobalXY = xy;
+    if (mouseDown === false) {
+      mouseDown = true;
+    }
+    //console.log(e);
+    globalXYToFlatCursor();
+    if (e.button == 0 && e.buttons == 1 && lastButton == 0)
+      if (cursorOnWords())
+        CheckWord();
+    lastButton = e.button;
   }
-  //console.log(e);
-  globalXYToFlatCursor();
-  if (e.button == 0 && e.buttons == 1 && lastButton == 0)
-    if (cursorOnWords())
-      CheckWord();
-  lastButton = e.button;
 });
 //////////////////////////////////////////////////////////////
 //ИНИЦИАЛИЗАЦИИ ВСЯЧЕСКИЕ:////////////////////////////////////////////////////
