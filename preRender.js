@@ -153,7 +153,7 @@ function PlaceHackHeader(){
     }
     let squares="";
     for (let i = 0; i < CurrentAttempts; i++) {
-      squares+=Strings[Language]["Square"]+" ";
+      squares+=" " + Strings[Language]["Square"];
     }
     let TempAttempts = 
     placeText(0,3,((Strings[Language]["AttemptsLeft"]).format(CurrentAttempts)).toUpperCase()+squares);

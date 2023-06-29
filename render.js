@@ -8,7 +8,7 @@ function DrawChars() {
         ctx.rect(chars[fx][fy].canvas_x, chars[fx][fy].canvas_y, char_width, char_height);
         ctx.fillStyle = chars[fx][fy].bkColor;
         ctx.fill();
-        ctx.font = "bold 28px monospace";//32
+        ctx.font = "32px MyFont"//"bold 28px monospace";//"bold 28px monospace";//32
         ctx.textBaseline="bottom";
         ctx.fillStyle = chars[fx][fy].color;
         ctx.fillText(chars[fx][fy].char, chars[fx][fy].canvas_x, chars[fx][fy].canvas_y+char_height);

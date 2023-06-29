@@ -49,7 +49,7 @@ const Strings = {
       "RobcoIndustries": "robco industries (tm) termlink protocol",
       "AttemptsLeft": "{0} attempt(s) left:",
       "Cursor": "█",
-      "Square": "■",
+      "Square": "",
       "SetTerminalInquire": "set terminal/inquire",
       "RITV300": "rit-v300",
       "SetFileProtectionOwner": "set file/protection=owner:rwed accounts.f",

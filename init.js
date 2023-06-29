@@ -23,6 +23,7 @@ let Language = "en";
 let BkColor ="green";//"#"+(40).toString(16).padStart(2,'0')+(40).toString(16).padStart(2,'0')+(40).toString(16).padStart(2,'0');
 let Color = "lightgreen";//"#"+(255).toString(16).padStart(2,'0')+(176).toString(16).padStart(2,'0')+(0).toString(16).padStart(2,'0');
 let blockMouse = false;
+let myFont = new FontFace('myFont', 'url(FSEX300.ttf)');
 function reload(){////////////////////////////////////////////////
     GameState = 0;
     GlobalXY = {x:0,y:0};
@@ -56,6 +57,11 @@ function reload(){////////////////////////////////////////////////
     GenerateWordsTable();
 }
 
+myFont.load().then(function(font){
+  // with canvas, if this is ommited won't work
+  document.fonts.add(font);
+  console.log('Font loaded');
+});
 //Заполнение таблицы индексов границ слов
 function WordsTableRangesFill(){
   let i = 0;

@@ -10,7 +10,8 @@ const DumpWidth = 12;
 const DumpHeight = 34;
 const iHackingMinWords = 5;
 const iHackingMaxWords = 20;
-const TrashChars = "!\"#$%&\'()*+/:;<=>?@\\[\\]^_{|}";
+//const TrashChars = "!\"#$%&\'()*+/:;<=>?@\\[\\]^_{|}";
+const TrashChars = "!\"#$%&'()*+/\\:;<=>?@[]^_{|}";
 const OpenBrackets = "<[{(";
 const CloseBrackets = ">]})";
 
